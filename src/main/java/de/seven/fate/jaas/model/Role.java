@@ -13,7 +13,7 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = Role.FIND_BY_ROLE, query = "SELECT r FROM Role r WHERE r.roleName = :roleName")
 })
-@Table(name = "ROLES", uniqueConstraints = {@UniqueConstraint(columnNames = "roleName")})
+@Table(name = "ROLEX", uniqueConstraints = {@UniqueConstraint(columnNames = "roleName")})
 @Entity
 public class Role extends BaseEntity<Long> {
 

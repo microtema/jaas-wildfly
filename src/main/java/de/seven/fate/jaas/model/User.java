@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Created by Mario on 13.04.2016.
  */
-@Table(name = "USERS", uniqueConstraints = {@UniqueConstraint(columnNames = "userName")})
+@Table(name = "USERX", uniqueConstraints = {@UniqueConstraint(columnNames = "userName")})
 @Entity
 public class User extends BaseEntity<Long> {
 
