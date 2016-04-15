@@ -1,7 +1,6 @@
 package de.seven.fate.jaas.builder;
 
 import de.seven.fate.jaas.model.Role;
-import de.seven.fate.jaas.model.User;
 import de.seven.fate.model.builder.AbstractModelBuilder;
 import de.seven.fate.model.util.CollectionUtil;
 

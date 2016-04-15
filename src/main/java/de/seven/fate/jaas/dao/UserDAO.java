@@ -15,8 +15,7 @@ public class UserDAO extends AbstractEntityDAO<User, Long> {
     @Override
     protected void saveImpl(User entity) {
 
-        //entity.setRoles(roleDAO.attach(entity.getRoles()));
-        entity.setRoles(null);
+        entity.setRoles(roleDAO.attach(entity.getRoles()));
 
         super.saveImpl(entity);
     }

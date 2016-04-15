@@ -13,9 +13,16 @@ public class PasswordConverterTest {
 
     @Test
     public void convertToDatabaseColumn() throws Exception {
+        String hash = sut.convertToDatabaseColumn("admin");
+
+        Assert.assertEquals("jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=", hash);
+    }
+
+    @Test
+    public void convertToDatabaseColumn2() throws Exception {
         String hash = sut.convertToDatabaseColumn("password");
 
-        Assert.assertEquals("mepWztR8IUMdDFbvkE8oKuQlatthLE6JC22qG2HQwyw=", hash);
+        Assert.assertEquals("XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=", hash);
     }
 
     @Test

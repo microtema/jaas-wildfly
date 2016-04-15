@@ -6,6 +6,7 @@ import de.seven.fate.jaas.dao.RoleDAO;
 import de.seven.fate.jaas.dao.UserDAO;
 import de.seven.fate.jaas.model.Role;
 import de.seven.fate.jaas.model.User;
+import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -42,6 +43,7 @@ public class RoleDAOIT {
 
     @Deployment
     public static WebArchive createDeployment() {
+
         return DeploymentUtil.createDeployment();
     }
 
@@ -50,7 +52,7 @@ public class RoleDAOIT {
 
         models = builder.list();
 
-        transactional(() -> sut.save(models));
+        transactional(() -> sut.saveOrUpdate(models));
     }
 
     @After
@@ -60,8 +62,12 @@ public class RoleDAOIT {
     }
 
     @Test
-    public void test() {
+    public void test() throws Exception{
+        Role model = builder.random();
+        model.setRoleName("FOO");
+        transactional(() -> sut.save(model));
 
+        Assert.assertEquals(model, sut.get(model));
     }
 
     private void transactional(Runnable runnable) throws Exception {

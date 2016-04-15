@@ -1,9 +1,10 @@
 package de.seven.fate.jaas.converter;
 
+
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.AttributeConverter;
-import java.util.Base64;
 
 /**
  * Created by Mario on 13.04.2016.
@@ -11,15 +12,13 @@ import java.util.Base64;
 public class PasswordConverter implements AttributeConverter<String, String> {
 
     @Override
-    public String convertToDatabaseColumn(String attribute) {
+    public String convertToDatabaseColumn(String password) {
 
-        String base64 = Base64.getEncoder().encodeToString(attribute.getBytes());
+        byte[] hash = DigestUtils.sha256(password.getBytes());
 
-        byte[] hash = DigestUtils.sha256(base64);
+        String base64String = Base64.encodeBase64String(hash);
 
-        String pwd = Base64.getEncoder().encodeToString(hash);
-
-        return pwd;
+        return base64String;
     }
 
     @Override

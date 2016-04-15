@@ -6,6 +6,8 @@ import de.seven.fate.jaas.dao.RoleDAO;
 import de.seven.fate.jaas.dao.UserDAO;
 import de.seven.fate.jaas.model.Role;
 import de.seven.fate.jaas.model.User;
+import de.seven.fate.model.util.CollectionUtil;
+import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -71,8 +73,14 @@ public class UserDAOIT {
     }
 
     @Test
-    public void test() {
+    public void test() throws Exception {
+        User model = CollectionUtil.random(models);
+        model.setPassword("admin");
 
+        transactional(() -> sut.saveOrUpdate(models));
+
+        User entity = sut.get(model);
+        Assert.assertEquals("jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=", entity.getPassword());
     }
 
     private void transactional(Runnable runnable) throws Exception {

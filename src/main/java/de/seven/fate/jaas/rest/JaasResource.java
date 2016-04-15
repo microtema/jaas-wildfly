@@ -46,7 +46,9 @@ public class JaasResource {
     @Path("/logout")
     public Response logout() {
 
-        String username = request.getUserPrincipal().getName();
+        Principal principal = request.getUserPrincipal();
+
+        String username = principal.getName();
 
         try {
             request.logout();
