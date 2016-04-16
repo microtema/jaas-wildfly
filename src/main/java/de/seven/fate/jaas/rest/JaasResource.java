@@ -1,8 +1,6 @@
 package de.seven.fate.jaas.rest;
 
-import org.apache.http.HttpRequest;
-
-import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
@@ -16,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Path("/")
+@Stateless
 public class JaasResource {
 
     private static final Logger LOGGER = Logger.getLogger(JaasResource.class.getName());
@@ -23,14 +22,9 @@ public class JaasResource {
     @Context
     private HttpServletRequest request;
 
-    @GET
-    public Response test() {
-        return Response.status(200).entity("test page ok").build();
-    }
-
     @POST
     @Path("/login")
-    public Response login(@FormParam("username") String username, @FormParam("password") String password) {
+    public Response login(@FormParam("j_username") String username, @FormParam("j_password") String password) {
 
         try {
             request.login(username, password);
@@ -60,7 +54,7 @@ public class JaasResource {
     }
 
     @GET
-    @Path("/{role}")
+    @Path("/in/{role}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response role(@PathParam("role") String role) {
 

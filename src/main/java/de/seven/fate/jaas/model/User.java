@@ -24,7 +24,7 @@ public class User extends BaseEntity<Long> {
     @Convert(converter = PasswordConverter.class)
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     public String getUserName() {
